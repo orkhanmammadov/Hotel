@@ -1,0 +1,66 @@
+﻿@model List<Hotel.Models.User>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="page">
+    <div id="customer">
+
+        <div class="header">
+            <div class="row">
+                <div class="col-9">
+                    <h1><i class="fas fa-user"></i>İstifadəçilər</h1>
+                </div>
+                <div class="col-3 text-right">
+                    <a href="@Url.Action("create","user")" class="btn btn-success">Yeni İstifadəçi Yarat</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="customer-list">
+            <table class="table table-hover">
+                <thead>
+                    <tr style="background-color:black">
+                        <th></th>
+                        <th>Ad və Soyad</th>
+                        <th>E-poçt</th>
+                        <th>Vəzifə</th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="icon">
+                                    <img src="~/Public/assets/images/image-gallery/user.png" alt="">
+                                </div>
+                            </td>
+                            <td>
+                                <h6>@item.FullName</h6>
+                            </td>
+                          
+                            <td>
+                                <h6>@item.Email</h6>
+                            </td>
+                            <td>
+                                <h6>@item.Group.Name</h6>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("edit", new { id=item.Id})" class="btn btn-primary">Yenilə</a>
+                                <a onclick="return confirm(' @item.FullName adlı İstifadəçini Silməyə Əminsiniz?')" href="@Url.Action("delete", new { id=item.Id})" class="btn btn-danger">Sil</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+

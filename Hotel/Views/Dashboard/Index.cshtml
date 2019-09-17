@@ -1,0 +1,75 @@
+﻿@model List<Hotel.Models.Booking>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="page">
+    <div id="dashboard">
+        <div class="room-list">
+            <table class="table table-hover" style="display: table;">
+                <thead class="thead-dark">
+                    <tr>
+                       
+                        <th scope="col">Şəkil</th>
+                        <th>Reseption</th>
+                        <th>Nömrə</th>
+                        <th>Gün Sayı</th>
+                        <th>Ödəniləcək Məbləğ(Otaq)</th>
+                        <th>Durum</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="width:30%">
+                                <div class="photo">
+                                    <img src="~/Uploads/@item.Room.Photo" alt="">
+                                </div>
+                            </td>
+                            <td style="width:18%">
+                                <h3>@item.Customer.Fullname</h3>
+                            </td>
+                            <td style="width:5%">
+                                <h6>@item.Room.Number</h6>
+                            </td>
+                            @{
+
+                                DateTime startDate = item.CheckIn;
+                                DateTime endDate = item.CheckOut;
+                            TimeSpan t = endDate - startDate;
+                          double NrOfDays = t.TotalDays;
+                               
+                                }
+                            <td style="width:15%">
+                                <h6>@NrOfDays</h6>
+                            </td>
+                            <td style="width:15%">
+                                <h6 class="price"> @String.Format("{0:N0}", @item.Room.Price * (decimal)@NrOfDays) AZN</h6>
+                               
+                            </td>
+                            <td style="width:7%">
+                                @{
+                                    if (item.Status == false)
+                                    {
+                                        <h6 class="badge badge-danger">Dolu</h6>
+                                    }
+                                    else
+                                    {
+                                        <h6 class="badge badge-success">Boş</h6>
+                                    }
+                                }
+                            </td>
+                            <td style="width:10%">
+                                <a href="@Url.Action("checkout",new { id=item.Id})" class="btn btn-danger">Bitir</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

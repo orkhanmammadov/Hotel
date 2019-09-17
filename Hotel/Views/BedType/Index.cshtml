@@ -1,0 +1,58 @@
+﻿@model  List<Hotel.Models.BedType>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="page">
+    <div id="customer">
+
+        <div class="header">
+            <div class="row">
+                <div class="col-9">
+                    <h1><i class="fas fa-list"></i>Yataq Növü</h1>
+                </div>
+                <div class="col-3 text-right">
+                    <a href="@Url.Action("create","bedtype")" class="btn btn-success">Yataq Növü Yarat</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="customer-list">
+            <table class="table table-hover">
+                <thead>
+                    <tr style="background-color:black">
+                        <th></th>
+                        <th>Ad</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="icon">
+                                    <img src="~/Public/assets/images/image-gallery/category-icon-png-3.jpg" alt="">
+                                </div>
+                            </td>
+                            <td>
+                                <h6>@item.Name</h6>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("edit",new { id=item.Id })" class="btn btn-primary">Yenilə</a>
+                                <a onclick="return confirm('@item.Name  Silməyə Əminsən?')" href="@Url.Action("delete", new { id=item.Id})" class="btn btn-danger">Sil</a>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+</div>
+

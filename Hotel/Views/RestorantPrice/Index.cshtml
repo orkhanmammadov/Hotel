@@ -1,0 +1,74 @@
+﻿@model List<Hotel.Models.RestorantPrice>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="page">
+    <div id="customer">
+
+        <div class="header">
+            <div class="row">
+                <div class="col-9">
+                    <h1><i class="fas fa-utensils"></i>Sifarişlər</h1>
+                </div>
+                <div class="col-3 text-right">
+                    <a href="@Url.Action("create","restorantprice")" class="btn btn-success">Sifariş Əlavə Et</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="customer-list">
+            <table class="table table-hover">
+                <thead>
+                    <tr style="background-color:black">
+                        <th></th>
+                        <th>Otaq No</th>
+                        <th>Yemək</th>
+                        <th>Say</th>
+                        <th>Ödəniləcək Məbləğ</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            <div class="icon">
+                                <img src="~/Public/assets/images/image-gallery/52102.png" alt="">
+                            </div>
+                        </td>
+                        <td>
+                            <h6>@item.Room.Number</h6>
+                        </td>
+
+                        <td>
+                            <h6>@item.Menu.Name</h6>
+                        </td>
+                        <td>
+                            <h6>@item.Count</h6>
+                        </td>
+                        <td>
+                          
+
+                            <h6>  @String.Format("{0:N0}",item.Count * item.Menu.Price) $</h6>
+                        </td>
+
+                        <td>
+                            <a href="@Url.Action("edit",new { id=item.Id})" class="btn btn-primary">Yenilə</a>
+                            <a onclick="return confirm(' @item.Room.Number Sifarişini silmək istəyirsiniz?')" href="@Url.Action("delete",new { id=item.Id})" class="btn btn-danger">Sil</a>
+
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+</div>
+

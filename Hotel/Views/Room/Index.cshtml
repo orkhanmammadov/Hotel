@@ -1,0 +1,90 @@
+﻿@model List<Hotel.Models.Room>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="page">
+    <div id="room">
+
+        <div class="header">
+            <div class="row">
+                <div class="col-9">
+                    <h1><i class="fas fa-hotel"></i>Otaqlar</h1>
+                </div>
+                <div class="col-3 text-right">
+                    <a href="@Url.Action("create","room")" class="btn btn-success">Otaq Yarat</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="room-list">
+            <table class="table table-hover">
+                <thead>
+                    <tr style="background-color:black">
+                        <th>Şəkil</th>
+                        <th>Haqqında</th>
+                        <th>Otaq</th>
+                        <th>Böyük</th>
+                        <th>Uşaq</th>
+                        <th>Yataq</th>
+                        <th>Qiymət</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            <div class="photo" style="height:100px;width:250px;">
+                                <img src="~/Uploads/@item.Photo" alt="">
+                            </div>
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
+                            <h6>@item.Number</h6>
+                        </td>
+                        <td>
+                            <h6>@item.AdultCapacity</h6>
+                        </td>
+                        <td>
+                            <h6>@item.ChildCapacity</h6>
+                        </td>
+                        <td>
+                            <h6>@item.BedType.Name</h6>
+                        </td>
+                        <td>
+                            <h6 class="price p-1" style="border-radius:5px">@item.Price $</h6>
+                        </td>
+                        <td>
+                           @if (item.Status == false)
+                           {
+                                <h6 class="price p-2" style="border-radius:5px;background-color:red;">Dolu</h6>    }
+                           else
+                           {
+                        <h6 class="price p-1" style="border-radius:5px">BoŞ</h6>}
+                        </td>
+                        <td>
+                            <a href="@Url.Action("edit", new { id=item.Id})" class="btn btn-primary mb-1" style="width:90px;">Yenilə</a>
+                            <a onclick="return confirm(' @item.Number Nömrəli Otağı Silmək İstəyirsinizmi?')" href="@Url.Action("delete", new { id=item.Id})" class="btn btn-danger">Sil</a>
+
+                        </td>
+                    </tr>
+                    }
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+</div>
+
